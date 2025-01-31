@@ -1,9 +1,9 @@
 # Enzyme_Activity_Calculator
 
-This code will take raw experimental values,
-Returns: Complete sheet(.PDF) of analysis with Summary.
+    This code will take raw experimental values,
+    Returns: Complete sheet(.PDF) of analysis with Summary.
 
-Aims as of 31/01/2025 :
+## Aims as of 31/01/2025 :
 
 0. Generate a thorough understanding of the math behind the labs.
 1. Read online Excel file. Update live. ---> OpenPyXl, Pandas
@@ -13,6 +13,6 @@ Aims as of 31/01/2025 :
 5. Designates values to their respective values following any calculations
 6. Appends images (at a specific size) and values to a pre-made .docx template. ---> docx2pdf
 
-Completed on:
+## Completed on:
 
 31 Jan, 2025 ---> 0. Generate a thorough understanding of the math behind the labs.
