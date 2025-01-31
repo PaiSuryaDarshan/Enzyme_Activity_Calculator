@@ -15,4 +15,4 @@ Aims as of 31/01/2025 :
 
 Completed on:
 
-0. 31 Jan, 2025 ---> Generate a thorough understanding of the math behind the labs.
+31 Jan, 2025 ---> 0. Generate a thorough understanding of the math behind the labs.
