@@ -5,9 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tabulate import tabulate
 from scipy import stats
-# import pylustrator as pl
-
-# pl.start()
 
 Test_file = "../BetaTest_Day_5_Spreadsheet.xlsx"
 
@@ -113,7 +110,7 @@ def plot(x, y, plot_name="Bradford", show_flag=0):
     plt.text(x_loc_of_graph_eq, y_loc_of_graph_eq, f"y = {trend.slope.round(3)}x + {trend.intercept.round(3)} \n R² = {trend.rvalue.round(4)}")
     # plots
     plt.plot(x, fit_line, label="best", color="red", linestyle='--', alpha=0.85)
-    plt.scatter(x, y)
+    plt.scatter(x, y, color="k", label="Data Points")
     # legend
     plt.legend()
     # store current figure
@@ -132,7 +129,7 @@ def plot(x, y, plot_name="Bradford", show_flag=0):
     
     return trend
 
-
+# def 
 
 
 
