@@ -21,17 +21,20 @@ def MakeTable(doc, df):
 
 class Brad:
 
-    def Edit_Brad_temp(df, ImageName, savename = f"Brad_{datetime.now().date()}.docx"):
+    def Edit_Brad_temp(df_norm, df_calc, trend, ImageName, savename = f"Brad_{datetime.now().date()}.docx"):
 
         doc = Document("./Templates/Bradfor_Temp.docx")
 
         dict_to_replace = {
             '{Date}': f'Date: {datetime.now().date()}',
             '{Time}': f'Time: {datetime.now().time()}',
-            '{Table}': MakeTable(doc, df),
+            '{Table_norm}': MakeTable(doc, df_norm),
+            '{Table_calc}': MakeTable(doc, df_calc),
             '{Image_1}': "PLACEHOLDER",
             '{Image_2}': "PLACEHOLDER",
+            '{Graph_Eq}': f"y = {trend.slope.round(4)}x + {trend.intercept.round(4)} \n R2 = {trend.rvalue.round(4)}",
             }            
+        
         counter = 0
         for paragraph in doc.paragraphs:
             for key in dict_to_replace.keys():
@@ -47,7 +50,7 @@ class Brad:
                     p = doc.add_paragraph()
                     r = p.add_run()
                     imagePath = "./Data_Storage/"
-                    r.add_picture(imagePath+ImageName+' w Unknown.png')
+                    r.add_picture(imagePath+ImageName+' w.o. Unknown.png')
                     break
 
                 elif f"{key}" == "{Image_2}" and counter == 1:
@@ -57,7 +60,7 @@ class Brad:
                     p = doc.add_paragraph()
                     r = p.add_run()
                     imagePath = "./Data_Storage/"
-                    r.add_picture(imagePath+ImageName+' w.o. Unknown.png')
+                    r.add_picture(imagePath+ImageName+' w Unknown.png')
                     break
 
         doc.save(f"./Output/{savename}")
@@ -67,4 +70,4 @@ class Brad:
 if __name__ == "__main__":
     Test_file = "../BetaTest_Day_5_Spreadsheet.xlsx"
     x, y, df, path = PB.Parse_Std_Curve(Test_file)
-    Brad.Edit_Brad_temp(df, "Trial")
+    # Brad.Edit_Brad_temp(df, "Trial")

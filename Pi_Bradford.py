@@ -180,7 +180,7 @@ def Equation_solver(unknown, trend):
     if len(unknown) != 0:
         for unk in unknown:
             Normalised_ans   = (unk - trend.intercept) / trend.slope
-            Denormalised_ans = (Normalised_ans * 1000)/2
+            Denormalised_ans = ((Normalised_ans * 1000)/2)/ 20                 # Obtained Concentration / Volume (μl)
             list_of_calculations_norm.append(Normalised_ans)
             list_of_calculations_denorm.append(Denormalised_ans)
     else:
@@ -188,7 +188,7 @@ def Equation_solver(unknown, trend):
         unknown = [0.5]
         for unk in unknown:
             Normalised_ans   = (unk - trend.intercept) / trend.slope
-            Denormalised_ans = (Normalised_ans * 1000)/2
+            Denormalised_ans = ((Normalised_ans * 1000)/2)/ 20                 # Obtained Concentration / Volume (μl)
             list_of_calculations_norm.append(Normalised_ans)
             list_of_calculations_denorm.append(Denormalised_ans)
 
@@ -247,7 +247,14 @@ def unknown_calculator_and_plotter(x, y, unknown, trend, plot_name="Bradford", s
     elif show_flag == 1:
         plt.show()
 
-    return calculations_denorm
+    # Table df
+
+    table_dict = {"Sample No.": np.arange(1,10).reshape(9), "Absorbance": y_unk.reshape(9), "Calculated conc.":values_unk.reshape(9).round(3)}
+    df_for_table = pd.DataFrame(table_dict)
+
+    table_file_df = df_for_table
+
+    return calculations_denorm, table_file_df
 
 if __name__ == "__main__":
     x, y, file, unk = Parse_Std_Curve(Test_file)
