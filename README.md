@@ -16,3 +16,6 @@
 ## Completed on:
 
 31 Jan, 2025 ---> 0. Generate a thorough understanding of the math behind the labs.
+01 Feb, 2025 ---> 1. Read online Excel file. Update live. ---> OpenPyXl, Pandas
+01 Feb, 2025 ---> 2. Plot required graphs and saves it as an image (with a specific size) to folder ---> Matplotlib
+02 Feb, 2025 ---> 3. Retrives (& plots) Graph Equation for calibration curve ---> sp.Linreg (SciPy, also returns $R^2$ value and Std deviation)
