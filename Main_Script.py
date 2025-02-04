@@ -19,6 +19,6 @@ print(f"Graph Equation: \n\n\t y={trend.slope:.4f}x + ({trend.intercept:.4f}) wi
 print("Concentration of protein = ", Obtained_concentration, " μg/μl. \n")
 print()
 
-Pi_S2W.Brad.Edit_Brad_temp(df_norm, df_calc, trend, "Trial") # TODO: <--- Uncheck to save to doc
+# Pi_S2W.Brad.Edit_Brad_temp(df_norm, df_calc, trend, "Trial") # TODO: <--- Uncheck to save to doc
 
 # * 2. Enzymatic Assay --------------------------------------------------
