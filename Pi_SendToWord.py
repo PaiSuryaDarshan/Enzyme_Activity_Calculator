@@ -4,11 +4,13 @@ from docx import Document
 import Pi_Bradford as PB
 from datetime import datetime
 
-def MakeTable(doc, df):
+def EditTable(doc, df, index):
     
     # add a table to the end and create a reference variable
     # extra row is so we can add the header row
-    t = doc.add_table(df.shape[0]+1, df.shape[1])
+    print(f"Table at Position {index}")
+
+    t = doc.tables[index]
 
     # add the header rows.
     for j in range(df.shape[-1]):
@@ -28,10 +30,8 @@ class Brad:
         dict_to_replace = {
             '{Date}': f'Date: {datetime.now().date()}',
             '{Time}': f'Time: {datetime.now().time()}',
-            '{Table_norm}': MakeTable(doc, df_norm),
-            '{Table_calc}': MakeTable(doc, df_calc),
-            '{Image_1}': "PLACEHOLDER",
-            '{Image_2}': "PLACEHOLDER",
+            '{Image1}': "PLACEHOLDER",
+            '{Image2}': "PLACEHOLDER",
             '{Graph_Eq}': f"y = {trend.slope.round(4)}x + {trend.intercept.round(4)} \n R2 = {trend.rvalue.round(4)}",
             }            
         
@@ -43,25 +43,26 @@ class Brad:
                     paragraph.text = dict_to_replace[key]
                     break
 
-                elif f"{key}" == "{Image_1}" and counter == 0:
-                    print(counter)
-                    counter += 1
-                    paragraph.text = " "
-                    p = doc.add_paragraph()
+                elif f"{key}" in paragraph.text and f"{key}" == "{Image1}":
+                    print (paragraph.text)
+                    p = paragraph
+                    p.text = "Bradford Assay Curve"
                     r = p.add_run()
                     imagePath = "./Data_Storage/"
                     r.add_picture(imagePath+ImageName+' w.o. Unknown.png')
                     break
 
-                elif f"{key}" == "{Image_2}" and counter == 1:
-                    print(counter)
-                    counter += 1
-                    paragraph.text = " "
-                    p = doc.add_paragraph()
+                elif f"{key}" in paragraph.text and f"{key}" == "{Image2}":
+                    print (paragraph.text)
+                    paragraph.text = "Bradford Assay with Unknown(s)"
+                    p = paragraph
                     r = p.add_run()
                     imagePath = "./Data_Storage/"
                     r.add_picture(imagePath+ImageName+' w Unknown.png')
                     break
+        
+        EditTable(doc, df_norm, 0)               
+        EditTable(doc, df_calc, 1)               
 
         doc.save(f"./Output/{savename}")
         

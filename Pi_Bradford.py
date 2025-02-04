@@ -54,7 +54,7 @@ def Parse_Std_Curve(FilePath, table_name="Bradford"):
     table_path = "./Data_Storage/"
     table_name = table_name
 
-    table_dict = ({"protein intial": initial_prot_conc, "protein normalised": prot_conc_norm, "absorbance":absorbance})
+    table_dict = ({"protein intial [init_x] \n(initial conc. = 2μg/μl)": initial_prot_conc, "protein normalised conc \n(x = (2μg/μl . [init_x] μl)/1000μl)": prot_conc_norm, "absorbance":absorbance})
     df_for_table = pd.DataFrame(table_dict)
 
     f = open(f"{table_path+table_name}.txt", "w")
@@ -249,14 +249,18 @@ def unknown_calculator_and_plotter(x, y, unknown, trend, plot_name="Bradford", s
 
     # Table df
 
-    table_dict = {"Sample No.": np.arange(1,10).reshape(9), "Absorbance": y_unk.reshape(9), "Calculated conc.":values_unk.reshape(9).round(3)}
+    table_dict = {"Sample No.": np.arange(1,10).astype(int).reshape(9), "Absorbance": y_unk.reshape(9), "Calculated conc. (μg/μl)":values_unk.reshape(9).round(3)}
     df_for_table = pd.DataFrame(table_dict)
+
+    # f = open("Test.txt", "w")
+    # f.write(tabulate(df_for_table, headers='keys', tablefmt="fancy_outline"))
+    # f.close()
 
     table_file_df = df_for_table
 
     return calculations_denorm, table_file_df
 
-if __name__ == "__main__":
-    x, y, file, unk = Parse_Std_Curve(Test_file)
-    trend = plot(x, y, show_flag=0)
-    unknown_calculator_and_plotter(x, y, unk, trend)
+# if __name__ == "__main__":
+    # x, y, file, unk = Parse_Std_Curve(Test_file)
+    # trend = plot(x, y, show_flag=0)
+    # unknown_calculator_and_plotter(x, y, unk, trend)
